@@ -1,14 +1,20 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 const Search = () => {
-    return (
-        <div>
-
+  return (
+    <div className="border-[1px] w-full md:w-auto py-2 rounded-full hover:shadow-md transition cursor-pointer">
+      <div className="flex flex-row items-center justify-between ">
+        <div className = 'txt-sm font-semibold px-6'>
+            Anywhere
         </div>
-    );
-}
+        <div className = 'hidden sm:block text-sm font-semibold px-6 border-x-[1px] flex-1 text-center'>
+            Any Week
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Search;
-
