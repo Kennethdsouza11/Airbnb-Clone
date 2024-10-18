@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from './components/navbar/Navbar';
+import ClientOnly from './components/ClientOnly';
 import { Nunito } from "next/font/google";
 
 export const metadata: Metadata = {
@@ -21,7 +22,10 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={font.className}>
+          <ClientOnly>
           <Navbar/>
+          </ClientOnly>
+          
         {children}
       </body>
     </html>
