@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from './components/navbar/Navbar';
 import ClientOnly from './components/ClientOnly';
+import Modal from './components/modals/Modal';
 import { Nunito } from "next/font/google";
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body
         className={font.className}>
           <ClientOnly>
+          <Modal/>
           <Navbar/>
           </ClientOnly>
           
