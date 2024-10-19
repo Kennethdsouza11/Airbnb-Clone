@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 // useCallback memorizes the function so that it only gets re-created if any dependencies changes.
 
@@ -47,6 +47,22 @@ const Modal: React.FC<ModalProps> = ({
       onClose();
     }, 300);
   }, [disabled, onClose]);
+
+  const handleSubmit = useCallback(() => {
+    if (disabled) {
+        return;
+    }
+
+    onSubmit();
+  }, [disabled, onSubmit]);
+
+  const handleSecondaryAction = useCallback(() => {
+    if (disabled || !secondaryAction){
+        return;
+    }
+
+    secondaryAction();
+  }, [disabled, secondaryAction])
   return <div> </div>;
 };
 
