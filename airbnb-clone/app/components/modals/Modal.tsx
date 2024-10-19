@@ -64,6 +64,10 @@ const Modal: React.FC<ModalProps> = ({
     secondaryAction();
   }, [disabled, secondaryAction])
   return <div> </div>;
+
+  if (!isOpen){
+    return null;
+  }
 };
 
 export default Modal;
