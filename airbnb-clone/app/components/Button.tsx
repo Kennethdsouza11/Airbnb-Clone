@@ -11,9 +11,24 @@ interface ButtonProp {
     icon?: IconType
 }
 
-const Button = () => {
+const Button: React.FC<ButtonProp> = ({
+    label,
+    onClick,
+    disabled,
+    outline,
+    small,
+    icon
+}) => {
     return (
-        <button> </button>
+        <button className = {`
+            relative
+            disabled:opacity-70
+            disabled:cursor-not-allowed
+            rounded-lg
+            hover:opacity-80
+            transition
+            w-full
+            `}>{label}</button>
     );
 }
 
