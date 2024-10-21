@@ -21,6 +21,8 @@ const Button: React.FC<ButtonProp> = ({
 }) => {
   return (
     <button
+      onClick={onClick}
+      disabled={disabled}
       className={`
             relative
             disabled:opacity-70
@@ -38,7 +40,7 @@ const Button: React.FC<ButtonProp> = ({
             ${small ? "border-[1px]" : "border-[2px]"}
             `}
     >
-        {Icon && (<Icon size = {24} className = "absolute left-4 top-3" />)}
+      {Icon && <Icon size={24} className="absolute left-4 top-3" />}
       {label}
     </button>
   );
