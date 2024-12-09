@@ -1,0 +1,24 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+//demo 
+model User {
+  id           String  @id @unique //@id directive tells prisma that id field is the primary key. and @default(uuid()) means that if no value is provided for the id field, prisma will automatically generate a UUID for it using the uuid() function
+  email        String
+  firstName    String
+  lastName     String
+  profileImage String? //this means that profileImage could be optional it could have a value or it couldnt
+}
