@@ -6,7 +6,8 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 
-import { Link, MenuIcon } from "lucide-react";
+import { MenuIcon } from "lucide-react";
+import Link from "next/link";
 import {
   RegisterLink,
   LoginLink,
@@ -45,18 +46,18 @@ export async function UserNav() {
                 </button>
               </form>
             </DropdownMenuItem>
+            <DropdownMenuSeparator />
             <DropdownMenuItem>
               <Link href="/my-homes" className="w-full">
                 My Listings
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
             <DropdownMenuItem>
               <Link href="/favourites" className="w-full">
                 My Favourites
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
+
             <DropdownMenuItem>
               <Link href="/reservations" className="w-full">
                 My Reservations
