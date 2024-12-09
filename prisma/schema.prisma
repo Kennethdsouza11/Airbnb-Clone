@@ -21,4 +21,18 @@ model User {
   firstName    String
   lastName     String
   profileImage String? //this means that profileImage could be optional it could have a value or it couldnt
+  Home         Home[] //user can have multiple homes but one home can have one user hence one to many relations. Home[] here is used to indicate that it is a one to many relation. Here Home is referring to multiple records of the Home model.
+}
+
+model Home {
+  id          String   @id @default(uuid())
+  title       String?
+  description String?
+  bedrooms    String?
+  country     String?
+  photo       String?
+  price       Int?
+  createdAt   DateTime @default(now())
+  User        User?    @relation(fields: [userId], references: [id])
+  userId      String?
 }
