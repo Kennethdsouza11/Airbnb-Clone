@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation"; //to get the search parameter from the url
 import { useCallback } from "react";
-import { stringify } from "querystring";
 import { cn } from "@/lib/utils";
 
 export function MapFilterItems() {
