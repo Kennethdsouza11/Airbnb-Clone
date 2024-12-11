@@ -15,11 +15,16 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/components";
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"; //helps with authentication in Next.js applications, particularly with Kinde. getKindeServerSession helps to get the current session information on the server side.
+import { createAirbnbHome } from "../actions";
 
 export async function UserNav() {
   //async means the function is asynchronous that allows the function to perform operations that take time without blocking the rest of the code from running.
   const { getUser } = getKindeServerSession(); //calls the getKindeServerSession and extracts the getUser function from its returned result.{ getUser } is destructing the function to get the information.
   const user = await getUser(); //await is used here to wait till the information is retrieved from the getUser function and then move on to the next line of code.
+
+  const createHomewithId = createAirbnbHome.bind(null, {
+    userId: user?.id as string,
+  }); //the bind is a built-in Javascript function that creates a new function. This new function has some arguments already "locked-in" or pre-filled. In this case we're creating a new function, createHomewithId, based on createAirbnbHome.
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -40,7 +45,8 @@ export async function UserNav() {
           //we use <></>because we need to wrap multiple items in a single element. This <></> is called a react fragment and its different from <div> as it does not create any extra DOM.
           <>
             <DropdownMenuItem>
-              <form className="w-full">
+              <form action={createHomewithId} className="w-full">
+                {/*the action attribute tells the form what to do when the form is submitted*/}
                 <button type="submit" className="w-full text-start">
                   Airbnb your Home
                 </button>
