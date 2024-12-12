@@ -1,12 +1,15 @@
 import { createCategoryPage } from "@/app/actions";
 import { CreationBottomBar } from "@/app/components/CreationBottomBar";
 import { SelectCategory } from "@/app/components/SelectCategory";
+import React from "react";
 
 export default function StructureRoute({
-  params
+  params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  // Unwrap params using React.use()
+  const unwrappedParams = React.use(params);
   return (
     //here params is passed as an argument to the StructureRoute and params must have a property called id which is of type string.
     <>
@@ -16,7 +19,7 @@ export default function StructureRoute({
         </h2>
       </div>
       <form action={createCategoryPage}>
-        <input type="hidden" name="homeId" value={params.id} />
+        <input type="hidden" name="homeId" value={unwrappedParams.id} />
         <SelectCategory />
         <CreationBottomBar />
       </form>
