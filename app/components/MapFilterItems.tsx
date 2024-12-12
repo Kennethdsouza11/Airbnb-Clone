@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import { categoryItems } from "../lib/categoryItems";
 import Link from "next/link";
 import Image from "next/image";
