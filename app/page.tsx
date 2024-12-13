@@ -4,10 +4,13 @@ import { ListingCard } from "./components/ListingCard";
 import { Suspense } from "react";
 import { SkeletonCard } from "./components/SkeletonCard";
 import { NoItems } from "./components/NoItems";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 async function getData({
   searchParams,
+  userId,
 }: {
+  userId: string | undefined;
   searchParams?: { filter?: string };
 }) {
   const data = await prisma.home.findMany({
@@ -23,6 +26,11 @@ async function getData({
       price: true,
       description: true,
       country: true,
+      Favourite: {
+        where: {
+          userId: userId ?? undefined, //we want to get the favourites if the user id matches with the logged in user
+        },
+      },
     },
   });
   return data;
@@ -50,21 +58,25 @@ async function ShowItems({
 }: {
   searchParams?: { filter?: string };
 }) {
-  const data = await getData({ searchParams: searchParams });
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+  const data = await getData({ searchParams: searchParams, userId: user?.id });
   return (
     <>
-      {data.length === 0 ? (<NoItems />) : (
-      <div className="grid lg-grid-cols-4 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
-        {data.map((item) => (
-          <ListingCard
-            key={item.id}
-            imagePath={item.photo as string}
-            description={item.description as string}
-            location={item.country as string}
-            price={item.price as number}
-          /> //key is used to tell the items apart
-        ))}
-      </div>
+      {data.length === 0 ? (
+        <NoItems />
+      ) : (
+        <div className="grid lg-grid-cols-4 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
+          {data.map((item) => (
+            <ListingCard
+              key={item.id}
+              imagePath={item.photo as string}
+              description={item.description as string}
+              location={item.country as string}
+              price={item.price as number}
+            /> //key is used to tell the items apart
+          ))}
+        </div>
       )}
     </>
   );
