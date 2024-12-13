@@ -44,7 +44,7 @@ export function ListingCard({
         {userId && (
           <div className="z-10 absolute top-2 right-2">
             {isInFavouriteList ? (
-              <form action = {DeleteFromFavourite}>
+              <form action={DeleteFromFavourite}>
                 <input type="hidden" name="favouriteId" value={favouriteId} />
                 <input type="hidden" name="userId" value={userId} />
                 <input type="hidden" name="pathName" value={pathName} />
@@ -61,7 +61,7 @@ export function ListingCard({
           </div>
         )}
       </div>
-      <Link href="/" className="mt-2">
+      <Link href={`/home/${homeId}`} className="mt-2">
         <h3 className="font-medium text-base">
           {country?.flag} {country?.label} / {country?.region}
         </h3>
