@@ -12,8 +12,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useState } from "react";
-import dynamic from "next/dynamic";
-import { Skeleton } from "@/components/ui/skeleton";
+// import dynamic from "next/dynamic";
+// import { Skeleton } from "@/components/ui/skeleton";
 import { createLocation } from "@/app/actions";
 import React from "react";
 
@@ -55,7 +55,7 @@ export default function AddressRoute({
                   <SelectLabel>Countries</SelectLabel>
                   {getAllCountries().map((item) => (
                     <SelectItem key={item.value} value={item.value}>
-                      {item.flag} {item.label}
+                      {item.flag} {item.label} / {item.region}
                     </SelectItem>
                   ))}
                 </SelectGroup>
