@@ -1,12 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCountries } from "../lib/getCountries";
+import {
+  AddtoFavouriteButton,
+  DeleteFromFavouriteButton,
+} from "./SubmitButtons";
+import { addtoFavourite, DeleteFromFavourite } from "../actions";
 
 interface iAppProps {
   imagePath: string;
   description: string;
   location: string;
   price: number;
+  userId: string | undefined;
+  isInFavouriteList: boolean;
+  favouriteId: string;
+  homeId: string;
+  pathName: string;
 }
 
 export function ListingCard({
@@ -14,6 +24,11 @@ export function ListingCard({
   description,
   location,
   price,
+  userId,
+  isInFavouriteList,
+  favouriteId,
+  homeId,
+  pathName,
 }: iAppProps) {
   const { getCountryByValue } = useCountries();
   const country = getCountryByValue(location);
@@ -26,8 +41,27 @@ export function ListingCard({
           fill
           className="rounded-lg h-full object-cover"
         />
+        {userId && (
+          <div className="z-10 absolute top-2 right-2">
+            {isInFavouriteList ? (
+              <form action = {DeleteFromFavourite}>
+                <input type="hidden" name="favouriteId" value={favouriteId} />
+                <input type="hidden" name="userId" value={userId} />
+                <input type="hidden" name="pathName" value={pathName} />
+                <DeleteFromFavouriteButton />
+              </form>
+            ) : (
+              <form action={addtoFavourite}>
+                <input type="hidden" name="homeId" value={homeId} />
+                <input type="hidden" name="userId" value={userId} />
+                <input type="hidden" name="pathName" value={pathName} />
+                <AddtoFavouriteButton />
+              </form>
+            )}
+          </div>
+        )}
       </div>
-      <Link href="/" className = "mt-2">
+      <Link href="/" className="mt-2">
         <h3 className="font-medium text-base">
           {country?.flag} {country?.label} / {country?.region}
         </h3>
