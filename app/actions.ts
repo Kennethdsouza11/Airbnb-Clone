@@ -46,7 +46,7 @@ export async function createAirbnbHome({ userId }: { userId: string }) {
         userId: userId,
       },
     });
-    return redirect(`create/${data.id}/structure`);
+    return redirect(`/create/${data.id}/structure`);
   }
 }
 
