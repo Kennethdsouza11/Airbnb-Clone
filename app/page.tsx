@@ -64,7 +64,10 @@ async function ShowItems({
   return (
     <>
       {data.length === 0 ? (
-        <NoItems />
+        <NoItems
+          description="Please check other category..."
+          title="Uh Oh! No listings for this categories"
+        />
       ) : (
         <div className="grid lg-grid-cols-4 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
           {data.map((item) => (
@@ -74,6 +77,11 @@ async function ShowItems({
               description={item.description as string}
               location={item.country as string}
               price={item.price as number}
+              userId={user?.id}
+              favouriteId={item.Favourite[0]?.id}
+              isInFavouriteList={item.Favourite.length > 0 ? true : false}
+              homeId={item.id}
+              pathName="/"
             /> //key is used to tell the items apart
           ))}
         </div>
