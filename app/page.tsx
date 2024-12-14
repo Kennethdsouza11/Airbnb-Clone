@@ -6,6 +6,8 @@ import { SkeletonCard } from "./components/SkeletonCard";
 import { NoItems } from "./components/NoItems";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
+import { unstable_noStore as NoStore } from "next/cache"; //used to tell next.js to not cache this file
+
 async function getData({
   searchParams,
   userId,
@@ -19,6 +21,7 @@ async function getData({
     bathroom?: string;
   };
 }) {
+  NoStore();
   const data = await prisma.home.findMany({
     where: {
       addedCategory: true,
