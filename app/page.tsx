@@ -11,14 +11,24 @@ async function getData({
   userId,
 }: {
   userId: string | undefined;
-  searchParams?: { filter?: string };
+  searchParams?: {
+    filter?: string;
+    country?: string;
+    guests?: string;
+    room?: string;
+    bathroom?: string;
+  };
 }) {
   const data = await prisma.home.findMany({
     where: {
       addedCategory: true,
       addedLocation: true,
       addedDescription: true,
-      categoryName: searchParams?.filter ?? undefined,
+      categoryName: searchParams?.filter ?? undefined, // ?? is used to return the right hand operator when the left hand operator is null
+      country: searchParams?.country ?? undefined,
+      guests: searchParams?.guests ?? undefined,
+      bedrooms: searchParams?.room ?? undefined,
+      bathrooms: searchParams?.bathroom ?? undefined,
     },
     select: {
       photo: true,
@@ -39,7 +49,13 @@ async function getData({
 export default function Home({
   searchParams,
 }: {
-  searchParams?: { filter?: string };
+  searchParams?: {
+    filter?: string;
+    country?: string;
+    guests?: string;
+    room?: string;
+    bathroom?: string;
+  };
 }) {
   //searchParams is the string after the ? in the URl for example if /home?filter=popular is the url then searchParams will be filter: 'popular'
 
@@ -56,7 +72,13 @@ export default function Home({
 async function ShowItems({
   searchParams,
 }: {
-  searchParams?: { filter?: string };
+  searchParams?: {
+    filter?: string;
+    country?: string;
+    guests?: string;
+    room?: string;
+    bathroom?: string;
+  };
 }) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
