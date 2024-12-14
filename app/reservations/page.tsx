@@ -3,8 +3,9 @@ import { ListingCard } from "../components/ListingCard";
 import { NoItems } from "../components/NoItems";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
-
+import { unstable_noStore as NoStore } from "next/cache";
 async function getData(userId: string) {
+  NoStore();
   const data = await prisma.reservation.findMany({
     where: {
       userId: userId,
